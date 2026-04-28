@@ -1,0 +1,88 @@
+Model:
+    'system' system=ID
+    declarations*=Declaration
+;
+
+Declaration:
+      ScopeDecl
+    | HazardDecl
+    | HarmDecl
+    | ContextDecl
+    | RiskDecl
+    | MeasureDecl
+    | RequirementDecl
+;
+
+ScopeDecl:
+    'scope' name=ID '{'
+        ('task' task=STRING)?
+        ('platform' platform=STRING)?
+        ('environment' environment=STRING)?
+        ('stakeholder' stakeholder=STRING)?
+    '}'
+;
+
+HazardDecl:
+    'hazard' name=ID ':' description=STRING
+;
+
+HarmDecl:
+    'harm' name=ID ':' description=STRING
+;
+
+ContextDecl:
+    'context' name=ID ':' description=STRING
+    'forHazard' hazard=[HazardDecl]
+    'causesHarm' harm=[HarmDecl]
+;
+
+RiskDecl:
+    'risk' name=ID 'for' context=[ContextDecl] '{'
+        'severity' severity=Severity
+        'frequency' frequency=Frequency
+        'possibility' possibility=Possibility
+        ('class' riskClass=RiskClass)?
+        ('acceptable' acceptable=Bool)?
+    '}'
+;
+
+MeasureDecl:
+    kind=MeasureKind 'measure' name=ID ':' description=STRING
+    'mitigates' context=[ContextDecl]
+    ('reducesTo' reducedClass=RiskClass)?
+;
+
+RequirementDecl:
+    'requirement' name=ID ':' description=STRING
+    ('derivedFrom' source=[MeasureDecl])?
+;
+
+MeasureKind:
+    'inherent'
+  | 'protective'
+  | 'information'
+;
+
+Severity:
+    'S1' | 'S2'
+;
+
+Frequency:
+    'F1' | 'F2'
+;
+
+Possibility:
+    'P1' | 'P2'
+;
+
+RiskClass:
+    'negligible'
+  | 'low'
+  | 'medium'
+  | 'high'
+  | 'very_high'
+;
+
+Bool:
+    'true' | 'false'
+;

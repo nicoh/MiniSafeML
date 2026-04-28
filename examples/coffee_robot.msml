@@ -1,0 +1,30 @@
+system CoffeeRobot
+
+scope S001 {
+    task "Prepare, deliver, and hand over a hot coffee to a user."
+    platform "Mobile service robot with arm and gripper"
+    environment "Domestic kitchen"
+    stakeholder "User"
+}
+
+hazard H001 : "Hot coffee may cause scalding."
+harm HM001 : "User suffers a reversible scalding injury."
+
+context C001 : "Robot drops coffee mug while handing over to a user."
+forHazard H001
+causesHarm HM001
+
+risk R001 for C001 {
+    severity S1
+    frequency F2
+    possibility P1
+    class medium
+    acceptable false
+}
+
+protective measure M001 : "Use stable handover pose and grasp verification before release."
+mitigates C001
+reducesTo low
+
+requirement REQ001 : "The robot shall release the mug only if a stable handover state has been verified."
+derivedFrom M001
