@@ -31,9 +31,11 @@ HarmDecl:
 ;
 
 ContextDecl:
-    'context' name=ID ':' description=STRING
-    'forHazard' hazard=[HazardDecl]
-    'causesHarm' harm=[HarmDecl]
+    'context' name=ID '{'
+        'description' description=STRING
+        'forHazard' hazard=[HazardDecl]
+        'causesHarm' harm=[HarmDecl]
+    '}'
 ;
 
 RiskDecl:
@@ -47,14 +49,18 @@ RiskDecl:
 ;
 
 MeasureDecl:
-    kind=MeasureKind 'measure' name=ID ':' description=STRING
-    'mitigates' context=[ContextDecl]
-    ('reducesTo' reducedClass=RiskClass)?
+    kind=MeasureKind 'measure' name=ID '{'
+        'description' description=STRING
+        'mitigates' context=[ContextDecl]
+        ('reducesTo' reducedClass=RiskClass)?
+    '}'
 ;
 
 RequirementDecl:
-    'requirement' name=ID ':' description=STRING
-    ('derivedFrom' source=[MeasureDecl])?
+    'requirement' name=ID '{'
+        'description' description=STRING
+        ('derivedFrom' source=[MeasureDecl])?
+    '}'
 ;
 
 MeasureKind:

@@ -15,25 +15,35 @@ harm HM001 : "User suffers a reversible scalding injury."
 harm HM002 : "User suffers bruising due to arm collision."
 harm HM003 : "User stumbles or is hit by the mobile base."
 
-context C001 : "Robot drops coffee mug while handing over to a user."
-forHazard H001
-causesHarm HM001
+context C001 {
+    description "Robot drops coffee mug while handing over to a user."
+    forHazard H001
+    causesHarm HM001
+}
 
-context C002 : "Robot tilts mug excessively while approaching handover pose."
-forHazard H001
-causesHarm HM001
+context C002 {
+    description "Robot tilts mug excessively while approaching handover pose."
+    forHazard H001
+    causesHarm HM001
+}
 
-context C003 : "Robot arm collides with user's hand during handover."
-forHazard H002
-causesHarm HM002
+context C003 {
+    description "Robot arm collides with user's hand during handover."
+    forHazard H002
+    causesHarm HM002
+}
 
-context C004 : "Mobile base approaches user too closely while carrying coffee."
-forHazard H003
-causesHarm HM003
+context C004 {
+    description "Mobile base approaches user too closely while carrying coffee."
+    forHazard H003
+    causesHarm HM003
+}
 
-context C005 : "Robot moves through doorway while user unexpectedly steps into its path."
-forHazard H003
-causesHarm HM003
+context C005 {
+    description "Robot moves through doorway while user unexpectedly steps into its path."
+    forHazard H003
+    causesHarm HM003
+}
 
 risk R001 for C001 {
     severity S1
@@ -75,27 +85,41 @@ risk R005 for C005 {
     acceptable false
 }
 
-protective measure M001 : "Use stable handover pose and grasp verification before release."
-mitigates C001
-reducesTo low
+protective measure M001 {
+    description "Use stable handover pose and grasp verification before release."
+    mitigates C001
+    reducesTo low
+}
 
-protective measure M002 : "Limit mug tilt angle during transport and handover approach."
-mitigates C002
-reducesTo very_high
+protective measure M002 {
+    description "Limit mug tilt angle during transport and handover approach."
+    mitigates C002
+    reducesTo very_high
+}
 
-protective measure M003 : "Use compliant arm motion and reduced speed in handover zone."
-mitigates C003
-reducesTo high
+protective measure M003 {
+    description "Use compliant arm motion and reduced speed in handover zone."
+    mitigates C003
+    reducesTo high
+}
 
-protective measure M004 : "Enforce minimum separation distance during base approach."
-mitigates C004
-reducesTo low
+protective measure M004 {
+    description "Enforce minimum separation distance during base approach."
+    mitigates C004
+    reducesTo low
+}
 
-requirement REQ001 : "The robot shall release the mug only if a stable handover state has been verified."
-derivedFrom M001
+requirement REQ001 {
+    description "The robot shall release the mug only if a stable handover state has been verified."
+    derivedFrom M001
+}
 
-requirement REQ002 : "The robot shall keep the mug tilt angle below the configured safety threshold during transport and approach."
-derivedFrom M002
+requirement REQ002 {
+    description "The robot shall keep the mug tilt angle below the configured safety threshold during transport and approach."
+    derivedFrom M002
+}
 
-requirement REQ004 : "The robot shall maintain the configured minimum separation distance while the mobile base approaches a user."
-derivedFrom M004
+requirement REQ004 {
+    description "The robot shall maintain the configured minimum separation distance while the mobile base approaches a user."
+    derivedFrom M004
+}
